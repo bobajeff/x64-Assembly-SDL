@@ -1,0 +1,4 @@
+*.o
+hello_sdl
+hello_sdl.s
+hello_sdl_dis.asm
