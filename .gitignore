@@ -1,7 +1,8 @@
 *.o
+*.s
 hello_sdl
-hello_sdl.s
 hello_sdl_dis.asm
 display_image
 pixel_manipulation.s
 pixel_manipulation
+graphics_project
