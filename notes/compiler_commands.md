@@ -37,3 +37,16 @@ gcc -g examples/hello_sdl.o -o hello_sdl -L/usr/lib/x86_64-linux-gnu  -lSDL2 -lc
 # SDL2's source code (matching the installed library) is downloaded somewhere
 gdb ./hello_sdl --directory <path to SDL2 source directroy>
 ```
+### GDB commands
+Print contents of register
+```
+p $<register>
+```
+Ex:
+```
+p $ecx
+```
+Print top 1000 elements of stack frame
+```
+x/1000x $rsp
+```
