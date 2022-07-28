@@ -3,7 +3,7 @@
         global main                    ; c compilers expect main as entry point
 
         extern SDL_Init, SDL_CreateWindow, SDL_DestroyWindow, SDL_GetWindowSurface
-        extern SDL_MapRGB, SDL_FillRect, SDL_UpdateWindowSurface, SDL_Delay, SDL_Quit
+        extern SDL_UpdateWindowSurface, SDL_Delay, SDL_Quit
         extern exit
 
 main:
@@ -37,11 +37,11 @@ y_loop:
         mov eax, [rbp-4]
         add eax, edx                   ; x + y(680)
         cdqe
-        lea rdx, [rax*4+0x0]           ; calculate relative pixel address = (x+y(680))*4  (4 bytes in int)
+        lea rdx, [rax*4]               ; calculate relative pixel address = (x+y(680))*4  (4 bytes in int)
         mov rax, [rbp-32]              ; get **pixels** address
         add rax, rdx                   ; add relative pixel address to **pixels** address
         cmp dword [rbp-8], 239         ; compare y with 239
-        jg branch_2
+        jg branch_2                    ; if y is greater than 239 jump
         mov dword [rax], 0xffffff      ; make pixel white
         jmp end_y_loop
 branch_2:
