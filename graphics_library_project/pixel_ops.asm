@@ -40,7 +40,7 @@ y_loop:
         movsd xmm0, qword [rel half]
         mulsd xmm0, xmm2               ; .5 * height
         comisd xmm0, xmm1              ; compare y with (height *.5)
-        jna branch_2                   ; jump in not met
+        jna branch_2                   ; jump if not met
         mov rax, _pixel_address
         mov dword [rax], WHITE
         jmp end_y_loop

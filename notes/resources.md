@@ -1,0 +1,2 @@
+* [Intro to Software Rendering with SDL2](https://benedicthenshaw.com/soft_render_sdl2.html)
+    - Great starting point for messing with pixels on SDL2. Shows 2 methods: one using SDL_Surface (CPU) and the other using SDL_Renderer (GPU).
