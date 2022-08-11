@@ -1,3 +1,6 @@
+;Copyright 2022 Jeffrey Brusseau
+;Licensed under the MIT license. See LICENSE file in the project root for details.
+
         section .text                  ; section declaration
 
         global pixel_ops               ; expose pixel_ops to rest of program
