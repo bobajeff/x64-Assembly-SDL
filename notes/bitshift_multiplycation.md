@@ -1,4 +1,4 @@
-My attempt at figuring out gccs bitshift multiplycation algorythm
+My attempt at figuring out gcc's bit-shift multiplication algorithm
 
 ```
 640 * 1 = 1010000000_2 * 1_2
