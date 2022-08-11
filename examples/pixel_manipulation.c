@@ -1,3 +1,6 @@
+//Copyright 2022 Jeffrey Brusseau
+//Licensed under the MIT license. See LICENSE file in the project root for details.
+
 // This is the c equivalent to the 'pixel_manipulation.asm' assembly file
 
 #include <SDL.h>
