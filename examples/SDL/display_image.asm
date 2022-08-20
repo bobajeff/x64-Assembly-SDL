@@ -66,6 +66,6 @@ main:
 window_name:
         db "Hello, world!", 0
 image_location:
-        db "./examples/res/doge.bmp", 0
+        db "./examples/SDL/res/doge.bmp", 0
 mode:
         db "rb", 0
