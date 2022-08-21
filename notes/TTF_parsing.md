@@ -6,8 +6,12 @@ I want this to be a more basic fundamentals guide on what to do than the TTF ref
 
 # What needs to happen
 
-* Input character code
+* Input character code and size
 * Read the TTF file
+    - read *table directory* for information about font format the list of tables and their offsets
+    - read `cmap` table to get *glyph index* from the character code/encoding
+    - read `loca` table to get location of the character data from the *glyph index*
+    - read `glyf` table to get the information on drawing the character
 * Lookup character data in TTF
 * Render character
     - Take curve and line data
