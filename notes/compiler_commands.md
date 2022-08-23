@@ -1,6 +1,15 @@
+# Normal Compiling
+
 **hello_sdl.c**
 ```
 gcc examples/SDL/hello_sdl.c -o hello_sdl -L/usr/lib/x86_64-linux-gnu  -lSDL2 -lc -lm -lpthread -lrt -I/usr/include/x86_64-linux-gnu/SDL2
+```
+
+**pixel_ops.c** and **main.c**
+```
+gcc examples/multiple_source_files/pixel_ops.c -c -L/usr/lib/x86_64-linux-gnu  -lSDL2 -lc -lm -lpthread -lrt -I/usr/include/x86_64-linux-gnu/SDL2
+
+gcc examples/multiple_source_files/main.c -o sdl_demo ./pixel_ops.o -L/usr/lib/x86_64-linux-gnu  -lSDL2 -lc -lm -lpthread -lrt -I/usr/include/x86_64-linux-gnu/SDL2
 ```
 
 **hello_sdl.asm**
@@ -9,6 +18,18 @@ nasm -felf64 examples/SDL/hello_sdl.asm
 #using c compiler for the linking with c libraries
 gcc examples/SDL/hello_sdl.o -o hello_sdl -L/usr/lib/x86_64-linux-gnu  -lSDL2 -lc -lm -lpthread -lrt -I/usr/include/x86_64-linux-gnu/SDL2
 ```
+**pixel_ops.asm** and **main.asm**
+
+```
+#assemble sources
+nasm -felf64 examples/multiple_source_files/pixel_ops.asm
+nasm -felf64 examples/multiple_source_files/main.asm
+
+#link via c compiler
+gcc examples/multiple_source_files/main.o examples/multiple_source_files/pixel_ops.o -o sdl_demo -L/usr/lib/x86_64-linux-gnu  -lSDL2 -lc -lm -lpthread -lrt -I/usr/include/x86_64-linux-gnu/SDL2
+
+```
+
 
 # Generate assembly from the c example
 
