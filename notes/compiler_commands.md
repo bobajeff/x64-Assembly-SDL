@@ -76,3 +76,18 @@ Print out the values in all the registers
 info registers
 ```
 https://sourceware.org/gdb/current/onlinedocs/gdb/Registers.html
+
+print address of variable
+```
+p &variable
+```
+
+print 3 bytes at address
+```
+ x/3xb 0x555555558153
+```
+
+print hex of edx register
+```
+p/x $edx
+```
