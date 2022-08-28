@@ -22,7 +22,7 @@ I want this to be a more basic fundamentals guide on what to do than the TTF ref
 The start of the file is the [Table Directory](https://docs.microsoft.com/en-us/typography/opentype/spec/otff#table-directory):
 ![Table Directory](res/table_directory.png)
 
-<span style="color:#ff0000fd">sfntVersion</span> - is `0x00010000` here because it's using TrueType outline format as (thus the `.ttf` extension) as opposed to CCF *(which normally would be `.otf`)*.
+<span style="color:#ff0000fd">version</span> - is `0x00010000` here because it's using TrueType outline format as (thus the `.ttf` extension) as opposed to CCF *(which normally would be `.otf`)*.
 
 <span style="color:#800080fd">numTables</span> - is how many elements are in the `Table Records Array`. Which is 16 (`0xF`) in this case.
 
@@ -30,16 +30,21 @@ The start of the file is the [Table Directory](https://docs.microsoft.com/en-us/
 
 <span style="color:#ff0066ff">offset's</span> - are the location in the file look for the table. These offsets are relative to the start of the file (`0x0`).
 
-For example the `GDEF` table starts at `0x944`:
+So `cmap` table of this file starts at `0x11CC`:
+![cmap Table](res/cmap_table.png)
 
-![GDEF Header](res/gdef_header.png)
+<span style="color:#ff0000fd">version</span> - always 0
 
-The <span style="color:#ff0000fd">majorVersion</span> and <span style="color:#800080fd">minorVersion</span> says this is a *GDEF Header, Version 1.2*. 
+<span style="color:#800080fd">numTables</span> - indicates this file only has 1 `EncodingRecord`
 
-All of the Offsets to the subtables here are relative to the beginning of the GDEF Header (`0x944`). For example <span style="color:#0000fffd">glyphClassDefOffset</span> is `0x2F6`. So the Glyph Class Definition table (`GlyphClassDef`) is located at: `0x944` + `0x2F6` = `0xC3A`
+<span style="color:#0000fffd">platformID</span> and <span style="color:#d45500fd">encodingID</span> - indicates *Windows* platform with *Unicode BMP* encoding
 
-![Glyph Class Definition Table](res/glyph_class_definition_table.png)
+<span style="color:#008000fd">subtableOffset</span> - All subtable offsets are relative to beginning of header which they appear. So `0x11CC` + `0xC` = `0x11D8`
 
-The <span style="color:#ff0000fd">classFormat</span> says this is a *Class Definition Format 2 Table*.
+<span style="color:#803300ff">format</span> - indicates the subtable format is [Format 4](https://docs.microsoft.com/en-us/typography/opentype/spec/cmap#format-4-segment-mapping-to-delta-values)
 
-The <span style="color:#008000fd">class</span> is enum value that can be either 1 (Base glyph), 2 (Ligature glyph), 3 (Mark glyph) or 4 (Component glyph).
+<span style="color:#008080ff">length</span> - the length is `0xC2E`. So this subrecord ends at `0x1E05`. *(`0x11D8`+`0xC2E` -1 (because zero indexed) = `0x1E05`)*
+
+<span style="color:#445500ff">segCountX2</span> - the address of the last byte in all arrays with "segCount" is `<arrayOffset>` + `segCountX2` (because these arrays are 2 bytes long) -1 (because zero indexed) 
+
+<span style="color:#d4aa00ff">endCode[segCount]</span> ends at `0x134B` *(`0x11E6` + `0x166` - 1 = `0x134B`)* and <span style="color:#ff2a2aff">startCode[segCount]</span> ends at `0x14B3` *(`0x134E` + `0x166` - 1 = `0x14B3`)*. Last value should for both arrays always be `0xFFFF`.
