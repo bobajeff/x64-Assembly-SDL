@@ -59,6 +59,7 @@ found_table:
 
 ; get offset address
         mov edx, [record + 8]
+        bswap edx ;convert to littleendian
 
 ; copy offset to offsets array
         lea rsi, [offsets]
@@ -122,6 +123,16 @@ parse_table_directory:                 ; args file_descriptor,
         mov [numbtables], eax
 
         call find_tables
+        ;check if cmap was found
+        mov al, [table_found]
+        cmp al, 0
+        je cmap_not_found
+
+        mov esi, [offsets]
+        mov rdi, [fd]
+        call parse_cmap wrt ..plt
+        mov eax, 0
+cmap_not_found:
 
         ret
 
@@ -153,4 +164,4 @@ outter_index:
 number_of_elements_in_index:
         dw 0x0003
 ; tmp_hold:
-;         dw 0
+;         dd 0

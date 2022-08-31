@@ -37,9 +37,11 @@ convert_nibbles_to_charaqcters:
 
         add rax, 1
         add r14, 1
+        cmp r14, r15
+        je print_remainder
         cmp rax, 4
         jl convert_nibbles_to_charaqcters
-
+print_remainder:
 ; print the string
         mov [tmp_1], rdi
         mov esi, 0
@@ -67,7 +69,9 @@ character_codes:
 test_bytes:
         db 0x21, 0xFF, 0xFF, 0x01, 0x00, 0x00, 0x0E, 0x0E
 output_string:
-        db "00000000 ", 0
+        ; db "00000000 ", 0
+        ; db "........ ", 0
+        db "         ", 0
 newline:
     db 10, 0
 tmp_1:
