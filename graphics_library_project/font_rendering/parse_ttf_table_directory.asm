@@ -138,8 +138,6 @@ cmap_not_found:
 
         section .data
 
-file_address:
-        db "test_files/fonts/Noto_Sans/NotoSans-Bold.ttf", 0
 fd:
         dq 0
 buf32:
